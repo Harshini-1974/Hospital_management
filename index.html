@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hospital Management System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f6f9;
+        }
+        .hero-section {
+            padding: 80px 20px;
+            text-align: center;
+            background: linear-gradient(to right, #007bff, #00c6ff);
+            color: white;
+        }
+        .hero-section h1 {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+        .hero-section p {
+            font-size: 1.2rem;
+        }
+        .info-section {
+            padding: 40px 20px;
+            background-color: white;
+            border-radius: 15px;
+            margin-top: -50px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        .footer {
+            background-color: #f8f9fa;
+            padding: 15px;
+            text-align: center;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <div class="container">
+        <a class="navbar-brand" href="/home">
+            <img src="https://img.icons8.com/ios-filled/50/000000/hospital-room.png" width="30" height="30" class="d-inline-block align-top" alt="">
+            HMS Portal
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/home">Home</a>
+                </li>
+
+                {% if session.get('user_id') %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/{{ session.get('role') }}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                {% endif %}
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<div class="hero-section">
+    <div class="container">
+        <h1>Welcome to Hospital Management System</h1>
+        {% if session.get('user_id') %}
+            <p>Hello, {{ session.get('role').capitalize() }}! You are logged in.</p>
+            <a href="/{{ session.get('role') }}" class="btn btn-light btn-lg mt-3">
+                Go to {{ session.get('role').capitalize() }} Dashboard
+            </a>
+            <a href="/logout" class="btn btn-outline-light btn-lg mt-3 ms-2">Logout</a>
+        {% else %}
+            <p>Efficiently manage your hospital’s operations - patients, doctors, and billing in one platform.</p>
+            <a href="/login" class="btn btn-light btn-lg mt-3">Login Now</a>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Info Section -->
+<div class="container info-section">
+    <div class="row text-center">
+        <div class="col-md-4">
+            <h4>For Admin</h4>
+            <p>Manage users, assign doctors, and handle billing records efficiently.</p>
+        </div>
+        <div class="col-md-4">
+            <h4>For Doctors</h4>
+            <p>Access patient records, add medical notes, and manage appointments.</p>
+        </div>
+        <div class="col-md-4">
+            <h4>For Patients</h4>
+            <p>View medical history, doctor information, and billing details.</p>
+        </div>
+    </div>
+</div>
+
+<!-- About Section -->
+<div class="container mt-5" id="about">
+    <h2>About Us</h2>
+    <p>Our Hospital Management System streamlines healthcare operations. Built for simplicity, it enables quick access and reliable data management for hospital staff and patients.</p>
+</div>
+
+<!-- Contact Section -->
+<div class="container mt-4 mb-5" id="contact">
+    <h2>Contact</h2>
+    <p><strong>Email:</strong> hospital@example.com</p>
+    <p><strong>Phone:</strong> +1 234 567 890</p>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <p>&copy; 2025 Hospital Management System. All rights reserved.</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

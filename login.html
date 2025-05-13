@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <style>
+        body { font-family: Arial; background: #eef; padding: 50px; }
+        .container { max-width: 400px; margin: auto; background: white; padding: 30px; border-radius: 8px; }
+        input, select { width: 100%; padding: 10px; margin: 10px 0; }
+        button { width: 100%; padding: 10px; background: teal; color: white; border: none; border-radius: 5px; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <form method="POST">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <select name="role" required>
+                <option value="">Select Role</option>
+                <option value="admin">Admin</option>
+                <option value="doctor">Doctor</option>
+                <option value="patient">Patient</option>
+            </select>
+            <button type="submit">Login</button>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                  <div class="error">{{ messages[0] }}</div>
+              {% endif %}
+            {% endwith %}
+        </form>
+    </div>
+</body>
+</html>
